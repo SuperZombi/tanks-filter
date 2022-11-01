@@ -1,0 +1,192 @@
+<div class="filters-wrapper">
+
+	<details class="filters-main">
+		<summary class="controls control-button">
+			<img src="root_/images/filter.svg">
+		</summary>
+		<div id="founded">
+			${LANG.founded}: <span class="counter">0</span>
+		</div>
+		<div class="content filters">
+			<div id="filters-overflow" class="maximum">
+				<details class="filter" name="nation">
+					<summary class="name">${LANG.nation}</summary>
+					<div class="content">
+						<div class="item" name="ussr">
+							<img src="root_/images/nation-ussr.png">
+							<span>${LANG.ussr}</span>
+						</div>
+						<div class="item" name="germany">
+							<img src="root_/images/nation-germany.png">
+							<span>${LANG.germany}</span>
+						</div>
+						<div class="item" name="usa">
+							<img src="root_/images/nation-usa.png">
+							<span>${LANG.usa}</span>
+						</div>
+						<div class="item" name="france">
+							<img src="root_/images/nation-france.png">
+							<span>${LANG.france}</span>
+						</div>
+						<div class="item" name="uk">
+							<img src="root_/images/nation-uk.png">
+							<span>${LANG.uk}</span>
+						</div>
+						<div class="item" name="czech">
+							<img src="root_/images/nation-czech.png">
+							<span>${LANG.czech}</span>
+						</div>
+						<div class="item" name="china">
+							<img src="root_/images/nation-china.png">
+							<span>${LANG.china}</span>
+						</div>
+						<div class="item" name="japan">
+							<img src="root_/images/nation-japan.png">
+							<span>${LANG.japan}</span>
+						</div>
+						<div class="item" name="poland">
+							<img src="root_/images/nation-poland.png">
+							<span>${LANG.poland}</span>
+						</div>
+						<div class="item" name="sweden">
+							<img src="root_/images/nation-sweden.png">
+							<span>${LANG.sweden}</span>
+						</div>
+						<div class="item" name="italy">
+							<img src="root_/images/nation-italy.png">
+							<span>${LANG.italy}</span>
+						</div>
+					</div>
+				</details>
+
+				<details class="filter" name="type">
+					<summary class="name">${LANG.tank_type}</summary>
+					<div class="content">
+						<div class="item" name="light">
+							<div class="img"><img src="root_/images/type-light.png"></div>
+							<span>${LANG.light_tank}</span>
+						</div>
+						<div class="item" name="medium">
+							<div class="img"><img src="root_/images/type-medium.png"></div>
+							<span>${LANG.medium_tank}</span>
+						</div>
+						<div class="item" name="heavy">
+							<div class="img"><img src="root_/images/type-heavy.png"></div>
+							<span>${LANG.heavy_tank}</span>
+						</div>
+						<div class="item" name="td">
+							<div class="img"><img src="root_/images/type-td.png"></div>
+							<span>${LANG.tank_destroyer}</span>
+						</div>
+						<div class="item" name="spg">
+							<div class="img"><img src="root_/images/type-spg.png"></div>
+							<span>${LANG.self_propelled_gun}</span>
+						</div>
+					</div>
+				</details>
+
+				<details class="filter" name="tier">
+					<summary class="name">${LANG.tier}</summary>
+					<div class="content">
+						<div class="item" name="1">
+							<span>I</span>
+						</div>
+						<div class="item" name="2">
+							<span>II</span>
+						</div>
+						<div class="item" name="3">
+							<span>III</span>
+						</div>
+						<div class="item" name="4">
+							<span>IV</span>
+						</div>
+						<div class="item" name="5">
+							<span>V</span>
+						</div>
+						<div class="item" name="6">
+							<span>VI</span>
+						</div>
+						<div class="item" name="7">
+							<span>VII</span>
+						</div>
+						<div class="item" name="8">
+							<span>VIII</span>
+						</div>
+						<div class="item" name="9">
+							<span>IX</span>
+						</div>
+						<div class="item" name="10">
+							<span>X</span>
+						</div>
+					</div>
+				</details>
+
+				<details class="filter" name="premium">
+					<summary class="name">${LANG.premium_tank}</summary>
+					<div class="content">
+						<div class="item oneselect" name="true">
+							<div class="img"><img src="root_/images/premium.svg"></div>
+							<span>${LANG.yes}</span>
+						</div>
+						<div class="item oneselect" name="false">
+							<div class="img"><img src="root_/images/no-premium.svg"></div>
+							<span>${LANG.no}</span>
+						</div>
+					</div>
+				</details>
+
+				<details class="filter" name="crew">
+					<summary class="name">${LANG.crew}</summary>
+					<div class="content">
+						<div class="item" name="commander">
+							<div class="img"><img src="root_/images/crew-commander.png"></div>
+							<span>${LANG.commander}</span>
+						</div>
+						<div class="item" name="driver">
+							<div class="img"><img src="root_/images/crew-driver.png"></div>
+							<span>${LANG.driver}</span>
+						</div>
+						<div class="item" name="gunner">
+							<div class="img"><img src="root_/images/crew-gunner.png"></div>
+							<span>${LANG.gunner}</span>
+						</div>
+						<div class="item" name="loader">
+							<div class="img"><img src="root_/images/crew-loader.png"></div>
+							<span>${LANG.loader}</span>
+						</div>
+						<div class="item" name="radioman">
+							<div class="img"><img src="root_/images/crew-radioman.png"></div>
+							<span>${LANG.radioman}</span>
+						</div>
+					</div>
+				</details>
+
+			</div>
+
+			<hr>
+
+			<div class="reset control-button" onclick="resetFiler()" style="display:none">${LANG.reset}</div>
+			<div class="apply control-button" onclick="parseFilers()">${LANG.apply}</div>
+		</div>
+	</details>
+
+	<div class="items">
+		<div id="items-header">
+			<div class="item">
+				<div class="nation focusable" sortby="nation"><img src="root_/images/filter-nation.svg"></div>
+				<div class="type focusable" sortby="type"><img src="root_/images/filter-type.svg"></div>
+				<div class="tier focusable" sortby="tier">I-X</div>
+				<div class="icon_hiden_on_pc"></div>
+				<div class="name">${LANG.tank}</div>
+			</div>
+		</div>
+
+		<div id="items-area"></div>
+
+		<div id="toTop">
+			<img src="root_/images/return-to-the-top.svg">
+		</div>
+	</div>
+
+	
+</div>

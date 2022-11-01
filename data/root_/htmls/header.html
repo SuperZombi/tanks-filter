@@ -1,0 +1,55 @@
+<div id="header">
+	
+	<div id="hamburger" class="hamburger hamburger--3dx" onclick="this.classList.toggle('is-active'); openMenu(this)">
+		<div class="hamburger-box">
+			<div class="hamburger-inner"></div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="main_menu">
+	<div id="popup_menu" class="menu-area">
+		<div class="back_button">
+			<i class="fa-regular fa-circle-left" lightClass="fa-regular" darkClass="fa-solid"></i>
+			${LANG.back}
+		</div>
+		<ul class="menu">
+			<li class="menu_title">
+				<i class="fa-solid fa-bars"></i>
+				${LANG.menu}
+			</li>
+			<li submenu="language">
+				<i class="fa-solid fa-globe"></i>
+				${LANG.language}
+			</li>
+			<li submenu="theme">
+				<i class="fa-solid fa-palette"></i>
+				${LANG.theme}
+			</li>
+		</ul>
+
+		<ul class="submenu" name="theme">
+			<li class="menu_title">
+				<i class="fa-solid fa-palette"></i>
+				${LANG.theme}:
+			</li>
+			<li value="light">
+				<i class="fa-solid fa-sun" lightClass="fa-regular" darkClass="fa-solid"></i>
+				${LANG.light}
+			</li>
+			<li value="dark">
+				<i class="fa-solid fa-moon" lightClass="fa-regular" darkClass="fa-solid"></i>
+				${LANG.dark}
+			</li>
+		</ul>
+
+		<ul class="submenu" name="language">
+			<li class="menu_title">
+				<i class="fa-solid fa-globe"></i>
+				${LANG.language}:
+			</li>
+			<li value="en">English</li>
+			<li value="ru">Русский</li>
+		</ul>
+	</div>
+</div>
