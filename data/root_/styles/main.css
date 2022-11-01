@@ -175,11 +175,10 @@ body{
 	height: 100%;
 	position: absolute;
 	top: 0;
-	right: -50%;
-	transition: 0.65s ease;
+	right: calc(max(25%, 350px) * -1);
+	transition: 0.6s ease;
 	border-radius: 20px 0 0 20px;
 	filter: drop-shadow(0 0 1px grey);
-	will-change: right;
 }
 .modal.open #popup_menu{
 	right: 0;
