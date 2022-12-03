@@ -94,6 +94,8 @@ def sort_tanks(array, sortby, order):
 		return sorted(array, key=lambda x: nations.index(x["nation"]), reverse=(order=="asc"))
 	elif sortby == "tier":
 		return sorted(array, key=lambda x: x["tier"], reverse=(order=="desc"))
+	elif sortby == "price":
+		return sorted(array, key=lambda x: x["price"], reverse=(order=="desc"))
 	elif sortby == "type":
 		types = ['light-true', 'light-false',
 				'medium-true', 'medium-false',
