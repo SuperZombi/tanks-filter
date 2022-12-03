@@ -1,6 +1,7 @@
 .filters-wrapper{
 	position: relative;
 	color: white;
+	margin-top: 50px;
 }
 .filters-main{
 	padding: 10px;
@@ -28,6 +29,7 @@
 	right: 0;
 	max-height: calc(100vh - 50px);
 	overflow: auto;
+	scroll-behavior: smooth;
 }
 .filters-main.opened{
 	width: 25%;
