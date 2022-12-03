@@ -3235,27 +3235,6 @@
         "premium": false
     },
     {
-        "name": "113",
-        "short_name": "113",
-        "nation": "china",
-        "tier": 10,
-        "type": "heavy",
-        "id": "Ch22_113P",
-        "price": 0,
-        "gold_price": 25000,
-        "wiki_link": "https://wiki.wargaming.net/Tank:Ch22_113P",
-        "img": "https://tanks.gg/img/tanks/china-Ch22_113P.png",
-        "vehicle_role": "role_HT_break",
-        "vehicle_role_desc": "Breakthrough Heavy Tank",
-        "crew": [
-            "commander",
-            "driver",
-            "gunner",
-            "loader"
-        ],
-        "premium": true
-    },
-    {
         "name": "113 Beijing Opera",
         "short_name": "113 BO",
         "nation": "china",
