@@ -161,22 +161,63 @@
 					</div>
 				</details>
 
+				<details class="filter ignore" name="hide">
+					<summary class="name">${LANG.hide_this}</summary>
+					<div class="content">
+						<div class="item active" name="price">
+							<div class="img"><img src="root_/images/silver.png"></div>
+							<span>${LANG.price}</span>
+						</div>
+						<div class="item" name="nation">
+							<div class="img"><img src="root_/images/filter-nation.svg" style="height:25px"></div>
+							<span>${LANG.nation}</span>
+						</div>
+						<div class="item" name="type">
+							<div class="img"><img src="root_/images/filter-type.svg"></div>
+							<span>${LANG.tank_type}</span>
+						</div>
+						<div class="item" name="icon">
+							<div class="img"><img src="root_/images/tank-icon.png"></div>
+							<span>${LANG.icon}</span>
+						</div>
+						<div class="item" name="tier">
+							<div class="img">
+								<span style="width:25px; margin-right: 5px;">I-X</span>
+							</div>
+							<span>${LANG.tier}</span>
+						</div>
+					</div>
+				</details>
+
+				<details class="filter ignore" name="wiki">
+					<summary class="name">${LANG.wiki_link}</summary>
+					<div class="content">
+						<div class="item oneselect active" name="wiki_wargaming">
+							<span>Wargaming wiki</span>
+						</div>
+						<div class="item oneselect" name="tankopedia">
+							<span>Tankopedia</span>
+						</div>
+					</div>
+				</details>
+
 			</div>
 
 			<hr>
 
 			<div class="reset control-button" onclick="resetFiler()" style="display:none">${LANG.reset}</div>
-			<div class="apply control-button" onclick="parseFilers()">${LANG.apply}</div>
+			<div class="apply control-button" onclick="applyFilers()">${LANG.apply}</div>
 		</div>
 	</details>
 
-	<div class="items">
+	<div id="items">
 		<div id="items-header">
 			<div class="item">
 				<div class="nation focusable" sortby="nation"><img src="root_/images/filter-nation.svg"></div>
 				<div class="type focusable" sortby="type"><img src="root_/images/filter-type.svg"></div>
 				<div class="tier focusable" sortby="tier">I-X</div>
-				<div class="icon_hiden_on_pc"></div>
+				<div class="price focusable" sortby="price"><img src="root_/images/silver.png"></div>
+				<div class="icon"></div>
 				<div class="name">${LANG.tank}</div>
 			</div>
 		</div>

@@ -7,6 +7,8 @@ function main(){
 
 	initFilterItems()
 	initSortBy()
+	initHideValues()
+	initWiki()
 	rebuildPage()
 
 	document.querySelectorAll("#toTop").forEach((el)=>{
@@ -16,6 +18,16 @@ function main(){
 			window.scrollTo(0,0)
 		}
 	})
+
+	var box_width = 0;
+	var target_box = document.querySelector("#items-area");
+	function outputsize(){
+		if (box_width != target_box.offsetWidth){
+			box_width = target_box.offsetWidth
+			document.querySelector("#items-header").style = "--need_width: " + target_box.offsetWidth + "px"
+		}
+	}
+	new ResizeObserver(outputsize).observe(target_box)
 }
 
 function showScrollTop(element){
@@ -113,6 +125,54 @@ function initSortBy(){
 	}
 }
 
+function initHideValues(){
+	let url = new URL(window.location.href);
+	if (url.searchParams.get('hide')){
+		if (url.searchParams.get('hide') == "nothing"){
+			document.querySelectorAll(".filters .filter[name='hide'] .item").forEach(e=>{
+				e.classList.remove("active")
+			})
+		}
+		else{
+			let arr = JSON.parse(url.searchParams.get('hide'))
+			let parrent = document.querySelector(".filters .filter[name='hide']")
+			arr.forEach(key=>{
+				let el = parrent.querySelector(`.item[name='${key}']`)
+				el.classList.add("active")
+			})
+			setHidden(arr)
+		}
+	}
+	else{
+		// Default
+		let default_ = [...document.querySelectorAll(".filters .filter[name='hide'] .item.active")].map(e=>e.getAttribute("name"))
+		setHidden(default_)
+	}
+}
+function parseHiden(){
+	let els = document.querySelectorAll(".filters .filter[name='hide'] .item.active")
+	let to_hide = []
+	els.forEach(el=>{
+		to_hide.push(el.getAttribute("name"))
+	})
+	let url = new URL(window.location.href);
+	if (to_hide.length == 0){
+		url.searchParams.set('hide', "nothing")
+	}
+	else{
+		url.searchParams.set('hide', JSON.stringify(to_hide))
+	}	
+	let old_url = decodeURIComponent(window.location.href)
+	let new_url = decodeURIComponent(url.href)
+	if (old_url != new_url){
+		window.history.pushState({},'', new_url);
+		setHidden(to_hide)
+	}
+}
+function setHidden(array){
+	document.querySelector("#items").setAttribute("hideValues", array)
+}
+
 
 function resetButtonControler(action){
 	if (action == "display"){
@@ -124,15 +184,20 @@ function resetButtonControler(action){
 		document.querySelector("#filters-overflow").classList.add("maximum")
 	}
 }
+function applyFilers(){
+	parseFilers();
+	parseHiden();
+	parseWiki();
+}
 function resetFiler(){
 	navigator.vibrate(50);
-	document.querySelectorAll(".filters .filter .item.active").forEach(el=>{
+	document.querySelectorAll(".filters .filter:not(.ignore) .item.active").forEach(el=>{
 		el.classList.remove("active")
 	})
 	parseFilers()
 }
 function parseFilers(){
-	let els = document.querySelectorAll(".filters .filter")
+	let els = document.querySelectorAll(".filters .filter:not(.ignore)")
 	let filters = {}
 	els.forEach(el=>{
 		let filter_name = el.getAttribute("name")
@@ -182,13 +247,47 @@ function parseSortBy(rebuild=true){
 	}
 }
 
+var wiki_link;
+function initWiki(){
+	let value = window.localStorage.getItem('wiki')
+	if (value){
+		wiki_link = value;
+		if (value != document.querySelector(".filters .filter[name='wiki'] .item.active").getAttribute("name")){
+			document.querySelector(`.filters .filter[name='wiki'] .item[name='${value}']`).click();
+		}
+	}
+	else{
+		wiki_link = document.querySelector(".filters .filter[name='wiki'] .item.active").getAttribute("name")
+	}
+}
+function parseWiki(){
+	let el = document.querySelector(".filters .filter[name='wiki'] .item.active")
+	if (el.getAttribute("name") != wiki_link){
+		wiki_link = el.getAttribute("name");
+		window.localStorage.setItem('wiki', wiki_link)
+		rebuildPage()
+	}
+}
+function getWiki_link(tank_id){
+	const WIKIs = {
+		"wiki_wargaming": `https://wiki.wargaming.net/Tank:${tank_id}`,
+		"tankopedia": `https://worldoftanks.eu/tankopedia/${tank_id}`
+	}
+	return WIKIs[wiki_link];
+}
+
 
 const roman_numerals = function(str){
 	const arr = {1: "I", 2: "II", 3: "III", 4: "IV", 5: "V", 6: "VI", 7: "VII", 8: "VIII", 9: "IX", 10: "X"}
 	return arr[str]
 }
+
+var newPageBuildRequest=false;
 async function rebuildPage() {
+	newPageBuildRequest=true;
+	await sleep(10)
 	document.querySelector("#items-area").innerHTML = LANG.loading;
+	newPageBuildRequest=false;
 	async function makeRequest(){
 		let url = new URL(window.location.href);
 		const response = await fetch("/api/all_tanks_filter", {
@@ -206,20 +305,23 @@ async function rebuildPage() {
 		document.querySelector("#founded .counter").innerHTML = answer['tanks'].length
 		var items_area = document.querySelector("#items-area");
 		items_area.innerHTML = ""
+		
 		for (const tank of answer['tanks']){
+			if (newPageBuildRequest){return}
 			let tank_type_icon = `<div class="type"><img src="root_/images/type-${tank['type']}.png"></div>`
 			if (tank['premium']){
 				tank_type_icon = `<div class="type premium"><img src="root_/images/type-${tank['type']}-premium.png"></div>`
 			}
 			let el = document.createElement("a")
 			el.className = "item"
-			el.href = `https://wiki.wargaming.net/Tank:${tank['id']}`
+			el.href = getWiki_link(tank['id'])
 			el.target="blank"
 			el.innerHTML = 
 			`
 				<div class="nation"><img src="root_/images/nation-${tank['nation']}.png"></div>
 				${tank_type_icon}
 				<div class="tier">${roman_numerals(tank['tier'])}</div>
+				<div class="price">${number_to_string(tank['price'])}</div>
 				<div class="icon"><img src="${tank['img']}"></div>
 				<div class="name">${tank['short_name']}</div>
 			`
@@ -231,4 +333,17 @@ async function rebuildPage() {
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function number_to_string(x){
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+}
+function number_to_short(value) {
+	if (value > 1000_000){
+		return Math.round(value/1000_000 * 10) / 10 + "M"
+	}
+	else if (value > 1000){
+		return Math.round(value/1000 * 10) / 10  + "K"
+	}
+	return value
 }

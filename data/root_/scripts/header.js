@@ -160,7 +160,7 @@ window.addEventListener("menu_closed", _=>{
 })
 Array.from(["mousedown", "touchstart"]).forEach( evt => {
 	document.addEventListener(evt,event=>{
-		touchstartX = event.screenX || event.touches[0].screenX;
+		touchstartX = event.clientX || event.touches[0].clientX;
 		if (window.innerWidth - touchstartX <= diff){
 			Array.from(["mousemove", "touchmove"]).forEach( evt2 => {
 				document.addEventListener(evt2, movingHandler);
@@ -193,7 +193,7 @@ Array.from(["mouseup", "touchend"]).forEach( evt => {
 	})
 })
 function movingHandler(event){
-	let position = event.screenX || event.touches[0].screenX;
+	let position = event.clientX || event.touches[0].clientX;
 	swiping_menu = true;
 	moving_val = touchstartX - position;
 	if (opened_fully){

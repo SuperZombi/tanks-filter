@@ -30,6 +30,7 @@
 	"premium_tank": "Premium",
 	"yes": "Yes",
 	"no": "No",
+	"price": "Price",
 	"apply": "Apply",
 	"reset": "Reset",
 	"loading": "Loading...",
@@ -40,5 +41,8 @@
 	"light": "Light",
 	"dark": "Dark",
 	"copy": "Copy",
-	"copied": "Copied!"
+	"copied": "Copied!",
+	"hide_this": "Hide",
+	"icon": "Icon",
+	"wiki_link": "Wiki link"
 }
