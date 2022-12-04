@@ -339,7 +339,7 @@
 #items-header > .item{
 	background: #5078bd;
 }
-#items-header > .item, #items-header > .item > *{
+#items-header > .item, #items-header > .item > *, #items-header > .item > .focusable{
 	height: 50px;
 }
 #items-header img{
@@ -399,12 +399,6 @@
 	#items-area{
 		min-height: unset;
 	}
-	#items-header{
-		width: var(--need_width);
-	}
-	#items-header > .item > .focusable{
-		height: 40px;
-	}
 	#items .item{
 		padding: 0 5px;
 	}
@@ -423,6 +417,12 @@
 	}
 	#items .item > .type.premium{
 		height: 30px;
+	}
+	#items-header{
+		width: var(--need_width);
+	}
+	#items-header > .item > .focusable{
+		height: 40px;
 	}
 	#sort-arrow{
 		margin-left: 2px;
