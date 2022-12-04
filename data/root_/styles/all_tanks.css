@@ -1,12 +1,6 @@
-#header{
-	position: fixed;
-	z-index: 100;
-	top: 0;
-}
 .filters-wrapper{
 	position: relative;
 	color: white;
-	margin-top: 50px;
 }
 .filters-main{
 	padding: 10px;
@@ -335,6 +329,7 @@
 
 #items-header{
 	height: 50px;
+	margin-bottom: 10px;
 }
 #items-header > .item{
 	background: #5078bd;

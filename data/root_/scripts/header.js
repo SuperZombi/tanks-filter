@@ -54,6 +54,11 @@ document.querySelector("#main_menu").onclick = function(e){
 		}	
 	}
 }
+document.querySelector("#main_menu .close").onclick = _=>{
+	document.querySelector("#main_menu").classList.remove("open");
+	document.getElementById("hamburger").classList.remove("is-active")
+	window.dispatchEvent(new Event('menu_closed'));
+}
 
 document.querySelectorAll(".menu-area").forEach(menuArea =>{
 	let back_button = menuArea.querySelector(".back_button")

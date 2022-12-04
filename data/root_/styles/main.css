@@ -265,10 +265,23 @@ body{
 	color: lightgrey;
 }
 
+.menu .close{
+	height: 26px;
+	cursor: pointer;
+	pointer-events: auto;
+}
+.hide_on_pc{
+	display: none;
+}
+
 
 @media all and (max-width: 500px) {
 	#toTop{
 		height: 75px;
+	}
+	.modal{
+		height: 100vh;
+		top: 0;
 	}
 	#popup_menu{
 		width: 100%;
@@ -278,5 +291,13 @@ body{
 	}
 	.menu-area ul li{
 		padding: 18px;
+	}
+	.menu-area ul li.menu_title.main-title{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.hide_on_pc{
+		display: unset;
 	}
 }
