@@ -24,6 +24,7 @@ def download():
 		final['type'] = tank_info.get("type")
 		final['id'] = tank_info.get('id')
 		final['tank_id'] = tank_info.get('tank_id')
+		final['slug'] = tank_info.get('slug')
 		final['price'] = tank_info.get('price')
 		final['gold_price'] = tank_info.get('gold_price')
 		final['img'] = f"https://tanks.gg/img/tanks/{tank_info.get('nation')}-{tank_info.get('id')}.png"
@@ -33,7 +34,7 @@ def download():
 		final['premium'] = tank_info.get("gold_price", 0) > 0
 
 		database.add(**final)
-		# time.sleep(0.5)
+		# time.sleep(0.1)
 
 # download()
 
@@ -65,26 +66,24 @@ def get_unical_vals():
 def compare_bases(db1, db2, changesdb="changes.db"):
 	database1 = DataBase(db1)
 	database2 = DataBase(db2)
-	diffs = []
+	diffs = {}
 	for i, data in enumerate(database1.data):
-		name = database1.data[i]['name']
+		name = data['name']
 		if database2.find(name=name) == None:
-			diffs.append(name)
+			diffs[i] = name
 	
 	if len(diffs) > 0:
-		pprint(diffs)
+		pprint(list(diffs.values()))
 		x = input("Delete this items? (Y/n)\n")
 		if x.lower() == "y":
-			for i in diffs:
-				id_ = database1.find(name=i)
+			for id_ in reversed(diffs):
 				database1.delete(id_)
 			print("Successfully deleted")
 		elif x.lower() == "n":
 			x = input("Want to make file with changes? (Y/n)\n")
 			if x.lower() == "y":
 				tempdatabase = DataBase(changesdb)
-				for i in diffs:
-					id_ = database1.find(name=i)
+				for id_ in diffs:
 					val = database1.get(id_)
 					tempdatabase.add(**val)
 	else:

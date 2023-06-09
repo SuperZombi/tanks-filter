@@ -273,10 +273,11 @@ function parseWiki(){
 		rebuildPage()
 	}
 }
-function getWiki_link(id, tank_id){
+function getWiki_link(id, tank_id, slug){
 	const WIKIs = {
 		"wiki_wargaming": `https://wiki.wargaming.net/Tank:${id}`,
 		"tankopedia": `https://worldoftanks.eu/tankopedia/${id}`,
+		"tanks.gg": `https://tanks.gg/tank/${slug}`,
 		"tomato": `https://www.tomato.gg/tanks/EU/${tank_id}`
 	}
 	return WIKIs[wiki_link];
@@ -335,7 +336,7 @@ async function rebuildPage() {
 			}
 			let el = document.createElement("a")
 			el.className = "item"
-			el.href = getWiki_link(tank['id'], tank['tank_id'])
+			el.href = getWiki_link(tank['id'], tank['tank_id'], tank['slug'])
 			el.target="blank"
 			el.innerHTML = 
 			`
