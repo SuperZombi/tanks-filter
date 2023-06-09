@@ -1,6 +1,7 @@
 from pprint import pprint
 import requests
 from PySimpleDB import DataBase
+import time
 database = DataBase("tanks.bd")
 
 def download():
@@ -22,9 +23,9 @@ def download():
 		final['tier'] = tank_info.get("tier")
 		final['type'] = tank_info.get("type")
 		final['id'] = tank_info.get('id')
+		final['tank_id'] = tank_info.get('tank_id')
 		final['price'] = tank_info.get('price')
 		final['gold_price'] = tank_info.get('gold_price')
-		final['wiki_link'] = f"https://wiki.wargaming.net/Tank:{tank_info.get('id')}"
 		final['img'] = f"https://tanks.gg/img/tanks/{tank_info.get('nation')}-{tank_info.get('id')}.png"
 		final['vehicle_role'] = tank_info.get("vehicle_role")
 		final['vehicle_role_desc'] = tank_info.get("vehicle_role_desc")
@@ -32,6 +33,7 @@ def download():
 		final['premium'] = tank_info.get("gold_price", 0) > 0
 
 		database.add(**final)
+		# time.sleep(0.5)
 
 # download()
 

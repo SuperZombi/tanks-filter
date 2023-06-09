@@ -8,10 +8,7 @@ app.config['JSON_AS_ASCII'] = False
 CORS(app)
 
 mydb = DataBase("tanks.bd")
-
-# @app.errorhandler(404)
-# def page_not_found(e):
-# 	return send_from_directory('data', '404.html'), 404
+last_db_update = int(os.path.getmtime("tanks.bd"))
 
 
 def find_languages(folder=""):
@@ -119,7 +116,7 @@ def all_tanks():
 		sorting_params = json.loads(sorting_params)
 		answer = sort_tanks(answer, sorting_params.get("sortby"), sorting_params.get("order"))
 
-		return jsonify({"tanks": answer})
+		return jsonify({"tanks": answer, 'last_db_update': last_db_update})
 	except Exception as e:
 		print(e)
 		abort(400)

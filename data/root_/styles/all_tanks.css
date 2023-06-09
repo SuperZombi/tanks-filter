@@ -18,6 +18,7 @@
 	font-size: 1.1rem;
 	color: var(--text-color);
 	transition: 0.5s;
+	white-space: nowrap;
 }
 #items{
 	width: calc(100% - 60px - 7px);
@@ -360,6 +361,21 @@
 	margin-left: 5px;
 }
 
+#last-update{
+	position: absolute;
+	left: 50%;
+	bottom: 10px;
+	transform: translateX(-50%);
+	white-space: nowrap;
+	color: var(--text-color);
+}
+#last-update > span{
+	font-size: 0.9rem;
+	color: blueviolet;
+}
+.dark #last-update > span{
+	color: violet;
+}
 
 
 @media all and (max-width: 500px) {

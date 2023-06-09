@@ -185,9 +185,11 @@ function resetButtonControler(action){
 	}
 }
 function applyFilers(){
-	parseFilers();
+	let need_update = parseFilers();
 	parseHiden();
-	parseWiki();
+	if (need_update){
+		parseWiki();
+	}
 }
 function resetFiler(){
 	navigator.vibrate(50);
@@ -234,6 +236,9 @@ function parseFilers(){
 	if (old_url != new_url){
 		window.history.pushState({},'', new_url);
 		rebuildPage()
+		return false;
+	} else{
+		return true;
 	}
 }
 function parseSortBy(rebuild=true){
@@ -268,10 +273,11 @@ function parseWiki(){
 		rebuildPage()
 	}
 }
-function getWiki_link(tank_id){
+function getWiki_link(id, tank_id){
 	const WIKIs = {
-		"wiki_wargaming": `https://wiki.wargaming.net/Tank:${tank_id}`,
-		"tankopedia": `https://worldoftanks.eu/tankopedia/${tank_id}`
+		"wiki_wargaming": `https://wiki.wargaming.net/Tank:${id}`,
+		"tankopedia": `https://worldoftanks.eu/tankopedia/${id}`,
+		"tomato": `https://www.tomato.gg/tanks/EU/${tank_id}`
 	}
 	return WIKIs[wiki_link];
 }
@@ -280,6 +286,13 @@ function getWiki_link(tank_id){
 const roman_numerals = function(str){
 	const arr = {1: "I", 2: "II", 3: "III", 4: "IV", 5: "V", 6: "VI", 7: "VII", 8: "VIII", 9: "IX", 10: "X"}
 	return arr[str]
+}
+function unixToDate(unixTime){
+	let date = new Date(unixTime * 1000);
+	var day = date.getDate().toString().padStart(2, "0");
+	var month = (date.getMonth() + 1).toString().padStart(2, "0");
+	var year = date.getFullYear();
+	return day + '.' + month + '.' + year;
 }
 
 var newPageBuildRequest=false;
@@ -302,6 +315,14 @@ async function rebuildPage() {
 	}
 	let answer = await makeRequest();
 	if (answer){
+		if (answer.last_db_update){
+			if (!document.querySelector("#last-update")){
+				let div = document.createElement("div");
+				div.id = "last-update";
+				div.innerHTML = LANG.last_update + ": <span>" + unixToDate(answer.last_db_update) + "</span>"
+				document.querySelector("#popup_menu .menu").appendChild(div)
+			}
+		}
 		document.querySelector("#founded .counter").innerHTML = answer['tanks'].length
 		var items_area = document.querySelector("#items-area");
 		items_area.innerHTML = ""
@@ -314,7 +335,7 @@ async function rebuildPage() {
 			}
 			let el = document.createElement("a")
 			el.className = "item"
-			el.href = getWiki_link(tank['id'])
+			el.href = getWiki_link(tank['id'], tank['tank_id'])
 			el.target="blank"
 			el.innerHTML = 
 			`

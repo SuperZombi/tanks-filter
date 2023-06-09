@@ -3,6 +3,7 @@
 		"inherit": "en"
 	},
 	"tanks_filter": "Фильтр Танков",
+	"last_update": "Последнее обновление",
 	"founded": "Найдено",
 	"nation": "Нация",
 		"ussr": "СССР",
