@@ -10436,28 +10436,6 @@
         "name": "FV4202",
         "short_name": "FV4202",
         "nation": "uk",
-        "tier": 10,
-        "type": "medium",
-        "id": "GB70_FV4202_105",
-        "tank_id": 14929,
-        "slug": "fv4202",
-        "price": 6100000,
-        "gold_price": 0,
-        "img": "https://tanks.gg/img/tanks/uk-GB70_FV4202_105.png",
-        "vehicle_role": "role_MT_universal",
-        "vehicle_role_desc": "Versatile Medium Tank",
-        "crew": [
-            "commander",
-            "driver",
-            "gunner",
-            "loader"
-        ],
-        "premium": false
-    },
-    {
-        "name": "FV4202",
-        "short_name": "FV4202",
-        "nation": "uk",
         "tier": 8,
         "type": "medium",
         "id": "GB70_N_FV4202_105",
