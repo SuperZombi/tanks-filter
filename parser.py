@@ -62,6 +62,19 @@ def get_unical_vals():
 
 # get_unical_vals()
 
+def find_dublicates():
+	unicals = []
+	not_unicals = []
+	for tank in database.data:
+		if tank['id'] in unicals:
+			not_unicals.append(tank['name'])
+		else:
+			unicals.append(tank['id'])
+	for i in not_unicals:
+		print(i)
+
+# find_dublicates()
+
 
 def compare_bases(db1, db2, changesdb="changes.db"):
 	database1 = DataBase(db1)
